@@ -1,0 +1,34 @@
+# Visual Studio Code
+.vscode/*
+
+# Sublime Text
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# WebStorm
+.idea/
+
+# Vim
+.swp
+.swo
+.swm
+
+# Emacs
+#~
+
+# Общие шаблоны для временных файлов и папок
+*.tmp
+*.bak
+*.swp
+
+dist/
+
+node_modules/
+env/
+
+
+
