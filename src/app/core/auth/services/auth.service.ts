@@ -1,14 +1,14 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {delay, Observable, of, throwError} from 'rxjs';
+import {API_BASE_URL} from '../../../shared/consts/api/base-url.const';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
   login(username: string, password: string): Observable<{ token: string }> {
-    // return this.http.post<{ token: string }>(`${this.baseUrl}/auth/login`, {
+    // return this.http.post<{ token: string }>(`${API_BASE_URL}/auth/login`, {
     //   username,
     //   password,
     // });

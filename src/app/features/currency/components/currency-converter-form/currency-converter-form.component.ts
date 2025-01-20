@@ -5,6 +5,7 @@ import {CurrencyConverterFormControl} from '../../models/currency-converter-form
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {tap} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
+import {CurrencyService} from '../../services/currency.service';
 
 @Component({
   selector: 'app-currency-converter-form',
@@ -24,6 +25,7 @@ export class CurrencyConverterFormComponent implements OnInit {
 
   private fb = inject(NonNullableFormBuilder)
   private store = inject(Store)
+  private currencyService = inject(CurrencyService)
 
   curList: { id: string, value: string }[] = [
     {id: 'one', value: 'First option'},
@@ -42,13 +44,20 @@ export class CurrencyConverterFormComponent implements OnInit {
   ngOnInit(): void {
     this.currencyConverterForm.valueChanges.subscribe(console.log);
 
+    // this.currencyService.getStatus().subscribe()
 
-    this.store.select((state) => state.auth.isAuthenticated)
-      .pipe(
-        tap(isAuthenticated => {
-          console.log('isAuthenticated', isAuthenticated)
-        })
-      )
-      .subscribe();
+    // this.currencyService.getLatest({
+    //   base_currency: 'PLN',
+    //   currencies: ['USD', 'EUR']
+    // }).subscribe()
+    // this.currencyService.getCurrencies(['USD', 'EUR']).subscribe()
+
+    // this.store.select((state) => state.auth.isAuthenticated)
+    //   .pipe(
+    //     tap(isAuthenticated => {
+    //       console.log('isAuthenticated', isAuthenticated)
+    //     })
+    //   )
+    //   .subscribe();
   }
 }
