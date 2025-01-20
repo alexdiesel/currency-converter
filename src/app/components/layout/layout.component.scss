@@ -1,0 +1,22 @@
+$layout-wrapper-w: 1024px;
+$layout-wrapper-p: 20px;
+
+:host {
+  display: grid;
+  grid-template-columns: var(--layout-wrapper-columns, auto #{$layout-wrapper-w} auto);
+
+  @media (max-width: $layout-wrapper-w + $layout-wrapper-p * 2) {
+    --layout-wrapper-columns: #{$layout-wrapper-p} auto #{$layout-wrapper-p};
+  }
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2/3;
+  gap: 20px;
+}
+
+.main-wrapper {
+
+}

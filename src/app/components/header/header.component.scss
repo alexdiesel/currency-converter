@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  &-img {
+    width: 40px;
+  }
+
+  &-title {
+    font-size: 18px;
+  }
+
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
+
+  &.active {
+    color: #007bff;
+  }
+}

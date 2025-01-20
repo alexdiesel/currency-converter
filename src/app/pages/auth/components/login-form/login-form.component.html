@@ -1,0 +1,33 @@
+<form class="login-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>
+      <span>User name</span>
+      <input [formControlName]="LoginFormControl.username"
+             type="text"
+             required>
+    </label>
+
+    <p *ngIf="loginForm.get(LoginFormControl.username)?.invalid">
+      {{ getControlErrorMessage(LoginFormControl.username, loginForm) }}
+    </p>
+  </div>
+
+  <div>
+    <label>
+      <span>Password</span>
+      <input [formControlName]="LoginFormControl.password"
+             type="password"
+             required>
+    </label>
+
+    <p *ngIf="loginForm.get(LoginFormControl.password)?.invalid">
+      {{ getControlErrorMessage(LoginFormControl.password, loginForm) }}
+    </p>
+  </div>
+
+  <button [disabled]="!loginForm.valid">Log in</button>
+
+</form>
