@@ -1,4 +1,5 @@
-<form class="login-form"
+<form *ngIf="{ authError: authError$ | async, isAuthenticated$: isAuthenticated$ | async}"
+      class="login-form"
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()">
 
@@ -10,7 +11,7 @@
              required>
     </label>
 
-    <p *ngIf="loginForm.get(LoginFormControl.username)?.invalid">
+    <p *ngIf="isControlInvalid(LoginFormControl.username)">
       {{ getControlErrorMessage(LoginFormControl.username, loginForm) }}
     </p>
   </div>
@@ -23,11 +24,16 @@
              required>
     </label>
 
-    <p *ngIf="loginForm.get(LoginFormControl.password)?.invalid">
+    <p *ngIf="isControlInvalid(LoginFormControl.username)">
       {{ getControlErrorMessage(LoginFormControl.password, loginForm) }}
     </p>
+  </div>
+
+  <div *ngIf="authError()">
+    <p class="error">{{ authError() }}</p>
   </div>
 
   <button [disabled]="!loginForm.valid">Log in</button>
 
 </form>
+

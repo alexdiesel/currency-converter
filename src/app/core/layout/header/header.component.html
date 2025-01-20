@@ -1,0 +1,14 @@
+<header class="header">
+
+  <a routerLink="/currency-converter" class="logo" title="Currency Converter">
+    <img class="logo-img" src="/logo.svg" alt="Currency Converter">
+    <span class="logo-title">Currency Converter</span>
+  </a>
+
+  @if (isAuthenticated$ | async) {
+    <nav class="nav">
+      <button (click)="logout()">Log out</button>
+    </nav>
+  }
+
+</header>

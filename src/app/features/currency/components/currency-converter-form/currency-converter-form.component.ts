@@ -1,8 +1,10 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgForOf} from '@angular/common';
-import {CurrencyConverterFormControl} from '../../typings/enums/currency-converter-form-control.enum';
-import {getControlErrorMessage} from '../../../../utils/get-control-error-message';
+import {CurrencyConverterFormControl} from '../../models/currency-converter-form-control.enum';
+import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
+import {tap} from 'rxjs/operators';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-currency-converter-form',
@@ -21,8 +23,9 @@ export class CurrencyConverterFormComponent implements OnInit {
   getControlErrorMessage = getControlErrorMessage;
 
   private fb = inject(NonNullableFormBuilder)
+  private store = inject(Store)
 
-  curList: Array<{ id: string, value: string }> = [
+  curList: { id: string, value: string }[] = [
     {id: 'one', value: 'First option'},
     {id: 'two', value: 'Second option'},
     {id: 'three', value: 'Third option'},
@@ -38,5 +41,14 @@ export class CurrencyConverterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.currencyConverterForm.valueChanges.subscribe(console.log);
+
+
+    this.store.select((state) => state.auth.isAuthenticated)
+      .pipe(
+        tap(isAuthenticated => {
+          console.log('isAuthenticated', isAuthenticated)
+        })
+      )
+      .subscribe();
   }
 }

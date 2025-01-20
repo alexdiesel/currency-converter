@@ -4,23 +4,23 @@
   <div>
     <label>
       <span>Currency from</span>
+      <select [formControlName]="CurrencyConverterFormControl.currency_from">
+        <option *ngFor="let cur of curList"
+                [value]="cur.id">{{ cur.value }}
+        </option>
+      </select>
     </label>
-    <select [formControlName]="CurrencyConverterFormControl.currency_from">
-      <option *ngFor="let cur of curList"
-              [value]="cur.id">{{ cur.value }}
-      </option>
-    </select>
   </div>
 
   <div>
     <label>
       <span>Currency to</span>
+      <select [formControlName]="CurrencyConverterFormControl.currency_to">
+        <option *ngFor="let cur of curList"
+                [value]="cur.id">{{ cur.value }}
+        </option>
+      </select>
     </label>
-    <select [formControlName]="CurrencyConverterFormControl.currency_to">
-      <option *ngFor="let cur of curList"
-              [value]="cur.id">{{ cur.value }}
-      </option>
-    </select>
   </div>
 
   <div>
