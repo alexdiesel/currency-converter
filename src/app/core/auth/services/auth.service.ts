@@ -1,18 +1,31 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {delay, Observable, of, throwError} from 'rxjs';
-import {API_BASE_URL} from '../../../shared/consts/api/base-url.const';
+import {RegForm} from '../models/reg-form.interface';
+import {LoginForm} from '../models/login-form.interface';
+import {User} from '../models/user.interface';
+import {LocalStorageService} from '../../../shared/services/local-storage.service';
+import {USER} from '../const/localstorage-keys';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private http = inject(HttpClient);
+  private localStorage = inject(LocalStorageService);
 
-  login(username: string, password: string): Observable<{ token: string }> {
-    // return this.http.post<{ token: string }>(`${API_BASE_URL}/auth/login`, {
-    //   username,
-    //   password,
-    // });
-    return of({token: btoa(`${username}:${password}`)}).pipe(delay(400));
+  reg({username, password, confirmPassword}: RegForm): Observable<User> {
+    return of({username}).pipe(delay(400));
+    // return throwError(() => new Error(`Username: ${username} already exists`)).pipe(delay(800))
+  }
+
+  login({username, password}: LoginForm): Observable<User> {
+    return of({username, token: btoa(`${username}:${password}`)}).pipe(delay(400));
     // return throwError(() => new Error(`Invalid username: ${username} or password`)).pipe(delay(800))
   }
+
+  saveUser(user: User): void {
+    this.localStorage.set(USER, user);
+  }
+
+  removeUser(): void {
+    this.localStorage.remove(USER);
+  }
+
 }

@@ -6,7 +6,7 @@ import {getControlErrorMessage} from '../../../../shared/utils/get-control-error
 import {Store} from '@ngrx/store';
 import {login} from '../../store/auth.actions';
 import {selectAuthError} from '../../store/auth.selectors';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {tap} from 'rxjs/operators';
 
 @Component({
@@ -15,10 +15,11 @@ import {tap} from 'rxjs/operators';
   imports: [
     ReactiveFormsModule,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    RouterLink,
   ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  styleUrl: '../../styles/auth-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent {
@@ -30,7 +31,7 @@ export class LoginFormComponent {
   private store = inject(Store);
   private router = inject(Router);
 
-  authError = signal<string | null>(null);
+  authError = signal<string | null | undefined>(null);
 
   loginForm = this.fb.group({
     [LoginFormControl.username]: ['', [Validators.required]],

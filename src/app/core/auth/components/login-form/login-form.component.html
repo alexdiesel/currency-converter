@@ -1,5 +1,7 @@
+<h1>Log In</h1>
+
 <form *ngIf="{ authError: authError$ | async, isAuthenticated$: isAuthenticated$ | async}"
-      class="login-form"
+      class="auth-form"
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()">
 
@@ -36,4 +38,6 @@
   <button [disabled]="!loginForm.valid">Log in</button>
 
 </form>
+
+<p>Don't have an account? <a routerLink="/auth/registration">Sign up</a></p>
 

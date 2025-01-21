@@ -1,5 +1,6 @@
-export interface AuthState {
+import {User} from './user.interface';
+
+export interface AuthState extends User {
   isAuthenticated: boolean;
-  token: string | null;
-  error: string | null;
+  error?: string | null;
 }

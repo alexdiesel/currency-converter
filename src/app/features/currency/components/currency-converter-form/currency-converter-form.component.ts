@@ -42,7 +42,6 @@ export class CurrencyConverterFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.currencyConverterForm.valueChanges.subscribe(console.log);
 
     // this.currencyService.getStatus().subscribe()
 
@@ -52,12 +51,5 @@ export class CurrencyConverterFormComponent implements OnInit {
     // }).subscribe()
     // this.currencyService.getCurrencies(['USD', 'EUR']).subscribe()
 
-    // this.store.select((state) => state.auth.isAuthenticated)
-    //   .pipe(
-    //     tap(isAuthenticated => {
-    //       console.log('isAuthenticated', isAuthenticated)
-    //     })
-    //   )
-    //   .subscribe();
   }
 }

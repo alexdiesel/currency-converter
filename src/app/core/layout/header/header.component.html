@@ -6,9 +6,12 @@
   </a>
 
   @if (isAuthenticated$ | async) {
-    <nav class="nav">
-      <button (click)="logout()">Log out</button>
-    </nav>
+    <div>
+      <span>Hi, {{ userName$ | async }}!</span>
+      <nav class="nav">
+        <button (click)="logout()">Log out</button>
+      </nav>
+    </div>
   }
 
 </header>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {CurrencyConverterFormComponent} from './components/currency-converter-form/currency-converter-form.component';
 import {CurrencyService} from './services/currency.service';
 
@@ -11,7 +11,8 @@ import {CurrencyService} from './services/currency.service';
     CurrencyService
   ],
   templateUrl: './currency-converter.component.html',
-  styleUrl: './currency-converter.component.scss'
+  styleUrl: './currency-converter.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrencyConverterComponent {
 

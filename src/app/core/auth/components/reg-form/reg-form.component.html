@@ -1,0 +1,58 @@
+<h1>Sign up</h1>
+
+<form *ngIf="{ authError: authError$ | async}"
+      class="auth-form"
+      [formGroup]="regForm"
+      (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>
+      <span>User name</span>
+      <input [formControlName]="RegFormControl.username"
+             type="text"
+             required>
+    </label>
+
+    <p *ngIf="isControlInvalid(RegFormControl.username)">
+      {{ getControlErrorMessage(RegFormControl.username, regForm) }}
+    </p>
+  </div>
+
+  <div>
+    <label>
+      <span>Password</span>
+      <input [formControlName]="RegFormControl.password"
+             type="password"
+             required>
+    </label>
+
+    <p *ngIf="isControlInvalid(RegFormControl.username)">
+      {{ getControlErrorMessage(RegFormControl.password, regForm) }}
+    </p>
+  </div>
+
+  <div>
+    <label>
+      <span>Confirm password</span>
+      <input [formControlName]="RegFormControl.confirmPassword"
+             type="password"
+             required>
+    </label>
+
+    <p *ngIf="isControlInvalid(RegFormControl.username)">
+      {{ getControlErrorMessage(RegFormControl.password, regForm) }}
+    </p>
+  </div>
+
+  <p *ngIf="regForm.errors?.['matchPasswords']">Passwords don't match</p>
+
+  <div *ngIf="authError()">
+    <p class="error">{{ authError() }}</p>
+  </div>
+
+  <button [disabled]="!regForm.valid">Sign up</button>
+
+</form>
+
+<p>Already have an account? <a routerLink="/auth/login">Log in</a></p>
+

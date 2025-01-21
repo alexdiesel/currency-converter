@@ -6,7 +6,7 @@ import {AppState} from '../../../shared/models/app-state.interface';
 
 
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate {
+export class CurrencyConverterGuard implements CanActivate {
 
   private store = inject(Store);
   private router = inject(Router);
@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.store.select((state: AppState) => state.auth.isAuthenticated).pipe(
       map((isAuthenticated) => {
-        if (isAuthenticated) {
-          this.router.navigate(['/currency-converter']);
+        if (!isAuthenticated) {
+          this.router.navigate(['/auth/login']);
           return false;
         }
         return true;

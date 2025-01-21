@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {selectIsAuthenticated} from '../../auth/store/auth.selectors';
+import {selectIsAuthenticated, selectUsername} from '../../auth/store/auth.selectors';
 import {AsyncPipe} from '@angular/common';
 import {logout} from '../../auth/store/auth.actions';
 
@@ -21,6 +21,7 @@ export class HeaderComponent {
   private store = inject(Store);
 
   isAuthenticated$ = this.store.select(selectIsAuthenticated);
+  userName$ = this.store.select(selectUsername);
 
 
   logout(): void {

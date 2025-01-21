@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {LoginFormComponent} from './components/login-form/login-form.component';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
   imports: [
-    LoginFormComponent
+    RouterOutlet,
   ],
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent {
 

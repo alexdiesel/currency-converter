@@ -8,13 +8,11 @@ export class LocalStorageService {
 
   set(key: string, value: any): boolean {
     try {
-      if (undefined === value) {
+      if (value === undefined) {
         return false;
       }
-
       value = JSON.stringify(value);
       localStorage.setItem(this.prefix + key, value);
-
       return true;
     } catch (e) {
       console.error(e);
@@ -25,24 +23,18 @@ export class LocalStorageService {
   get(key: string): unknown {
     try {
       const item = localStorage.getItem(this.prefix + key);
-
       if (item === null) {
         return item;
       }
-
       return JSON.parse(item);
     } catch (e) {
       console.error(e);
       return null;
     }
-
   }
 
   remove(key: string): void {
-    try {
-      localStorage.removeItem(this.prefix + key);
-    } catch (e) {
-      console.error(e);
-    }
+    localStorage.removeItem(this.prefix + key);
   }
+
 }
