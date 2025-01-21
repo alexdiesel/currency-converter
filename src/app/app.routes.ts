@@ -20,7 +20,6 @@ export const routes: Routes = [
           {
             path: 'registration',
             loadComponent: () => import('./core/auth/components/reg-form/reg-form.component').then(m => m.RegFormComponent),
-            // canActivate: [RegGuard], // TODO implement registration guard for registered users but not login
           },
           {path: '', redirectTo: 'login', pathMatch: 'full'}
         ]
@@ -31,6 +30,7 @@ export const routes: Routes = [
         canActivate: [CurrencyConverterGuard]
       },
       {path: '', redirectTo: 'auth', pathMatch: 'full'},
+      {path: '**', redirectTo: 'auth', pathMatch: 'full'},
     ],
   },
 ];

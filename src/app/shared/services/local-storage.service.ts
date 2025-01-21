@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
+import {LOCAL_STORAGE_PREFIX} from '../../core/auth/const/localstorage-keys';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  prefix = 'currency-converter-';
 
   set(key: string, value: any): boolean {
     try {
@@ -12,7 +12,7 @@ export class LocalStorageService {
         return false;
       }
       value = JSON.stringify(value);
-      localStorage.setItem(this.prefix + key, value);
+      localStorage.setItem(LOCAL_STORAGE_PREFIX + key, value);
       return true;
     } catch (e) {
       console.error(e);
@@ -22,7 +22,7 @@ export class LocalStorageService {
 
   get(key: string): unknown {
     try {
-      const item = localStorage.getItem(this.prefix + key);
+      const item = localStorage.getItem(LOCAL_STORAGE_PREFIX + key);
       if (item === null) {
         return item;
       }
@@ -34,7 +34,7 @@ export class LocalStorageService {
   }
 
   remove(key: string): void {
-    localStorage.removeItem(this.prefix + key);
+    localStorage.removeItem(LOCAL_STORAGE_PREFIX + key);
   }
 
 }

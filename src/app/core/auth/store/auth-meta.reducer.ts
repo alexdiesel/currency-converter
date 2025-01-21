@@ -12,11 +12,12 @@ export function authMetaReducer(reducer: ActionReducer<{
         if (action.type === INIT || action.type === UPDATE) {
             const user = localStorage.get(USER) as User;
             if (user) {
+                const {username, secret, token} = user
                 const auth = {
-                    username: user.username,
-                    token: user.token,
-                    isAuthenticated: true
+                    ...{username, secret, token},
+                    isAuthenticated: !!token
                 }
+                console.log('authMetaReducer INIT', JSON.stringify(auth, null, 2));
                 return reducer(
                     {...state, auth: {...auth}},
                     action
@@ -25,15 +26,7 @@ export function authMetaReducer(reducer: ActionReducer<{
         }
 
         const nextState = reducer(state, action);
-        if (nextState?.auth.token !== state?.auth.token) {
-            if (nextState.auth.token) {
-                const {token, username} = nextState.auth;
-                localStorage.set(USER, {token, username});
-            } else {
-                localStorage.remove(USER);
-            }
-        }
-
+        console.log('authMetaReducer', JSON.stringify(nextState, null, 2));
         return nextState;
     };
 }

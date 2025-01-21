@@ -5,38 +5,42 @@ import {AuthState} from '../models/auth-state.interface';
 const initAuthState: AuthState = {
   isAuthenticated: false,
   username: null,
+  secret: null,
   token: null,
   error: null,
 };
 
 export const authReducer = createReducer(
   initAuthState,
-  on(regSuccess, (state, {token, username}) => ({
+  on(regSuccess, (state, {secret, username}) => ({
       ...state,
-      isAuthenticated: true,
-      token,
+      isAuthenticated: false,
+      error: null,
+      secret,
       username,
     })
   ),
   on(regFailure, (state, {error}) => ({
-      ...initAuthState,
+      ...state,
       error
     })
   ),
-  on(loginSuccess, (state, {token, username}) => ({
+  on(loginSuccess, (state, {token}) => ({
       ...state,
       isAuthenticated: true,
+      error: null,
       token,
-      username,
     })
   ),
   on(loginFailure, (state, {error}) => ({
-      ...initAuthState,
+      ...state,
       error,
     })
   ),
   on(logout, (state) => ({
-      ...initAuthState,
+      ...state,
+      isAuthenticated: false,
+      token: null,
     })
   ),
 );

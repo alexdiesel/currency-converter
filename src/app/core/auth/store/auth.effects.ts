@@ -35,8 +35,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(regSuccess),
-        tap(({username, token}) => {
-          this.authService.saveUser({username}); // TODO implement registration guard
+        tap(({username, secret}) => {
+          this.authService.saveUser({username, secret});
           this.router.navigate(['/auth/login'])
         })
       ),
@@ -48,7 +48,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(regFailure),
         tap(err => {
-          console.error('Registration failure,', err)
+          console.error('Registration failure', err)
         })
       ),
     {dispatch: false}
@@ -75,8 +75,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(loginSuccess),
-        tap(({username, token}) => {
-          this.authService.saveUser({username, token});
+        tap(({token}) => {
+          this.authService.saveToken(token!);
           this.router.navigate(['/currency-converter'])
         })
       ),
@@ -99,7 +99,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(LOGOUT),
         tap(() => {
-          this.authService.removeUser();
+          this.authService.logOutUser();
           this.router.navigate(['/auth/login'])
         })
       ),

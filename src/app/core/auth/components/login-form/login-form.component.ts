@@ -5,7 +5,7 @@ import {LoginFormControl} from '../../models/login-form-control.enum';
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {Store} from '@ngrx/store';
 import {login} from '../../store/auth.actions';
-import {selectAuthError} from '../../store/auth.selectors';
+import {selectAuthError, selectIsAuthenticated} from '../../store/auth.selectors';
 import {Router, RouterLink} from '@angular/router';
 import {tap} from 'rxjs/operators';
 
@@ -43,9 +43,9 @@ export class LoginFormComponent {
       tap(error => this.authError.set(error))
     );
 
-  isAuthenticated$ = this.store.select(selectAuthError)
+  isAuthenticated$ = this.store.select(selectIsAuthenticated)
     .pipe(
-      tap(isAuthenticated => isAuthenticated && this.router.navigate(['/currency-converter-'])),
+      tap(isAuthenticated => isAuthenticated && this.router.navigate(['/currency-converter'])),
     );
 
   isControlInvalid(controlName: string): boolean | undefined {
