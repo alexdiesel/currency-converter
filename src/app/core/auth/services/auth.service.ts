@@ -42,4 +42,18 @@ export class AuthService {
     this.localStorage.set(USER, user);
   }
 
+  // TODO implement in future
+
+  refreshToken(): Observable<User> {
+    // TODO: refresh token
+    return of({token: 'token'}).pipe(delay(400));
+  }
+
+  logout(): Observable<null> {
+    // TODO: refresh token
+    return of(null).pipe(delay(100));
+  }
+
+  // TODO implement in future
+
 }
