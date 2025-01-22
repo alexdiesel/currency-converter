@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal,} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {JsonPipe, NgForOf} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {CurrencyConverterFormControl} from '../../models/currency-converter-form-control.enum';
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {CurrencyService} from '../../services/currency.service';
@@ -11,16 +11,18 @@ import {BASE_CURRENCY} from '../../consts/base-currency.const';
 import {INIT_CURRENCY} from '../../consts/init-currency.const';
 import {ExchangeRates} from '../../models/exchange-rates.interface';
 import {debounceTime} from 'rxjs';
+import {HistoryService} from '../../services/history.service';
 
 @Component({
   selector: 'app-currency-converter-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgForOf, JsonPipe],
+  imports: [ReactiveFormsModule, NgForOf],
   templateUrl: './currency-converter-form.component.html',
   styleUrl: './currency-converter-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrencyConverterFormComponent {
+
   CurrencyConverterFormControl = CurrencyConverterFormControl;
   getControlErrorMessage = getControlErrorMessage;
 
@@ -38,6 +40,7 @@ export class CurrencyConverterFormComponent {
   private destroyRef = inject(DestroyRef);
   private fb = inject(NonNullableFormBuilder);
   private currencyService = inject(CurrencyService);
+  private historyService = inject(HistoryService);
 
   currencyConverterForm = this.fb.group({
     [CurrencyConverterFormControl.base_currency]: [BASE_CURRENCY, [Validators.required]],
@@ -99,5 +102,16 @@ export class CurrencyConverterFormComponent {
         .get(CurrencyConverterFormControl.amountResult)
         ?.setValue(this.exchangeResult(), {emitEvent: false});
     });
+  }
+
+  saveToHistory(): void {
+    this.historyService.setExchangeHistory({
+      id: this.historyService.getExchangeHistoryLastIndex() + 1,
+      date: new Date().toISOString(),
+      baseCurrency: this.baseCurrency(),
+      baseAmount: this.baseAmount(),
+      targetCurrency: this.targetCurrency(),
+      exchangeResult: this.exchangeResult(),
+    })
   }
 }

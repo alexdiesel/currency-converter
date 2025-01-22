@@ -1,0 +1,33 @@
+:host {
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr) auto repeat(2, 1fr) auto;
+
+
+}
+
+.row {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: subgrid;
+
+  &:hover {
+    background: azure;
+  }
+}
+
+.cell {
+  padding: 5px;
+  border: 1px solid #ccc;
+
+  &_n {
+    background: aliceblue;
+  }
+
+  &_date {
+    background: antiquewhite;
+  }
+
+  &_equal {
+    background: aliceblue;
+  }
+}

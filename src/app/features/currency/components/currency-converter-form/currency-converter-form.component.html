@@ -37,9 +37,8 @@
 
   <button class="btn"
           [disabled]="!currencyConverterForm.valid"
-          type="submit">Save to list
+          (click)="saveToHistory()"
+          type="button">Save to History
   </button>
 
 </form>
-
-<pre>{{ exchangeResult() | json }}</pre>
