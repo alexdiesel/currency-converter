@@ -6,13 +6,13 @@ import {LOCAL_STORAGE_PREFIX} from '../../core/auth/const/localstorage-keys';
 })
 export class LocalStorageService {
 
-  set(key: string, value: any): boolean {
+  set<T>(key: string, value: T): boolean {
     try {
       if (value === undefined) {
         return false;
       }
-      value = JSON.stringify(value);
-      localStorage.setItem(LOCAL_STORAGE_PREFIX + key, value);
+      const string = JSON.stringify(value);
+      localStorage.setItem(LOCAL_STORAGE_PREFIX + key, string);
       return true;
     } catch (e) {
       console.error(e);

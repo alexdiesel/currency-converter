@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {loginFailure, loginSuccess, logout, regFailure, regSuccess} from './auth.actions';
-import {AuthState} from '../models/auth-state.interface';
+import {AuthState} from '../models/auth';
 
 const initAuthState: AuthState = {
   isAuthenticated: false,

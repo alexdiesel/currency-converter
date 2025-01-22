@@ -1,17 +1,16 @@
 import {Routes} from '@angular/router';
 import {LayoutComponent} from './core/layout/layout.component';
-import {AuthGuard} from './core/auth/guards/auth.guard';
-import {CurrencyConverterGuard} from './core/auth/guards/currency-converter.guard';
+import {AuthGuard} from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'auth',
         loadComponent: () => import('./core/auth/auth.component').then(m => m.AuthComponent),
-        canActivate: [AuthGuard],
         children: [
           {
             path: 'login',
@@ -27,7 +26,6 @@ export const routes: Routes = [
       {
         path: 'currency-converter',
         loadComponent: () => import('./features/currency/currency-converter.component').then(m => m.CurrencyConverterComponent),
-        canActivate: [CurrencyConverterGuard]
       },
       {path: '', redirectTo: 'auth', pathMatch: 'full'},
       {path: '**', redirectTo: 'auth', pathMatch: 'full'},

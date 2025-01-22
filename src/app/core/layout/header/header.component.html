@@ -4,14 +4,12 @@
     <img class="logo-img" src="/logo.svg" alt="Currency Converter">
     <span class="logo-title">Currency Converter</span>
   </a>
-
   @if (isAuthenticated$ | async) {
-    <div>
+    <div class="user">
       <span>Hi, {{ userName$ | async }}!</span>
-      <nav class="nav">
-        <button (click)="logout()">Log out</button>
-      </nav>
+      <button (click)="logout()">Log out</button>
     </div>
   }
+
 
 </header>

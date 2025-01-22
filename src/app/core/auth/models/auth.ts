@@ -3,3 +3,8 @@ export interface User {
   secret?: string | null;
   token?: string | null;
 }
+
+export interface AuthState extends User {
+  isAuthenticated: boolean;
+  error?: string | null;
+}

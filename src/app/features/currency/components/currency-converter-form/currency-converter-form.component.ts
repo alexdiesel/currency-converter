@@ -1,7 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal,} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgForOf} from '@angular/common';
-import {CurrencyConverterFormControl} from '../../models/currency-converter-form-control.enum';
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {CurrencyService} from '../../services/currency.service';
 import {getCurrencyOptionsFromResponse} from '../../utils/get-currency-options-from-response';
@@ -9,14 +7,15 @@ import {IdNameOption} from '../../../../shared/models/id-name-option';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {BASE_CURRENCY} from '../../consts/base-currency.const';
 import {INIT_CURRENCY} from '../../consts/init-currency.const';
-import {ExchangeRates} from '../../models/exchange-rates.interface';
 import {debounceTime} from 'rxjs';
 import {HistoryService} from '../../services/history.service';
+import {CurrencyConverterFormControl} from '../../models/currency';
+import {ExchangeRates} from '../../models/exchange';
 
 @Component({
   selector: 'app-currency-converter-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgForOf],
+  imports: [ReactiveFormsModule],
   templateUrl: './currency-converter-form.component.html',
   styleUrl: './currency-converter-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

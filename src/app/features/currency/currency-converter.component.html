@@ -4,7 +4,8 @@
         (click)="toggleForm()">{{ showForm() ? 'Hide form' : 'Show form' }}
 </button>
 
-<app-currency-converter-form *ngIf="showForm()"
-                             #currencyConverter></app-currency-converter-form>
+@if (showForm()) {
+  <app-currency-converter-form></app-currency-converter-form>
+}
 
 <app-currency-converter-history></app-currency-converter-history>

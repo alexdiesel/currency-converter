@@ -1,8 +1,8 @@
 import {createAction, props} from '@ngrx/store';
 import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, REG, REG_FAILURE, REG_SUCCESS} from './auth.actions.const';
-import {RegForm} from '../models/reg-form.interface';
-import {LoginForm} from '../models/login-form.interface';
-import {User} from '../models/user.interface';
+import {RegForm} from '../models/reg';
+import {LoginForm} from '../models/login';
+import {User} from '../models/auth';
 
 export const reg = createAction(
   REG,

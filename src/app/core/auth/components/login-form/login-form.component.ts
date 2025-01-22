@@ -1,20 +1,18 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AsyncPipe, NgIf} from '@angular/common';
-import {LoginFormControl} from '../../models/login-form-control.enum';
+import {AsyncPipe} from '@angular/common';
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {Store} from '@ngrx/store';
 import {login} from '../../store/auth.actions';
-import {selectAuthError, selectIsAuthenticated} from '../../store/auth.selectors';
+import {selectAuthError} from '../../store/auth.selectors';
 import {Router, RouterLink} from '@angular/router';
-import {tap} from 'rxjs/operators';
+import {LoginFormControl} from '../../models/login';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf,
     AsyncPipe,
     RouterLink,
   ],
@@ -31,22 +29,12 @@ export class LoginFormComponent {
   private store = inject(Store);
   private router = inject(Router);
 
-  authError = signal<string | null | undefined>(null);
-
   loginForm = this.fb.group({
     [LoginFormControl.username]: ['', [Validators.required]],
     [LoginFormControl.password]: ['', [Validators.required]]
   });
 
-  authError$ = this.store.select(selectAuthError)
-    .pipe(
-      tap(error => this.authError.set(error))
-    );
-
-  isAuthenticated$ = this.store.select(selectIsAuthenticated)
-    .pipe(
-      tap(isAuthenticated => isAuthenticated && this.router.navigate(['/currency-converter'])),
-    );
+  authError$ = this.store.select(selectAuthError);
 
   isControlInvalid(controlName: string): boolean | undefined {
     const control = this.loginForm.get(controlName);

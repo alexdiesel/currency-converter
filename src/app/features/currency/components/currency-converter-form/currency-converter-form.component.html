@@ -4,22 +4,25 @@
   <label class="label">
     <select class="control"
             [formControlName]="CurrencyConverterFormControl.base_currency">
-      <option *ngFor="let cur of currencyOptions()"
-              [value]="cur.id"
-              [disabled]="cur.id === targetCurrency()">
-        {{ cur.name }}
-      </option>
+      @for (cur of currencyOptions(); track cur.id) {
+        <option [value]="cur.id"
+                [disabled]="cur.id === targetCurrency()">
+          {{ cur.name }}
+        </option>
+      }
+
     </select>
   </label>
 
   <label class="label">
     <select class="control"
             [formControlName]="CurrencyConverterFormControl.currency">
-      <option *ngFor="let cur of currencyOptions()"
-              [value]="cur.id"
-              [disabled]="cur.id === baseCurrency()">
-        {{ cur.name }}
-      </option>
+      @for (cur of currencyOptions(); track cur.id) {
+        <option [value]="cur.id"
+                [disabled]="cur.id === baseCurrency()">
+          {{ cur.name }}
+        </option>
+      }
     </select>
   </label>
 

@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {delay, Observable, of, throwError} from 'rxjs';
-import {RegForm} from '../models/reg-form.interface';
-import {LoginForm} from '../models/login-form.interface';
-import {User} from '../models/user.interface';
+import {RegForm} from '../models/reg';
+import {LoginForm} from '../models/login';
 import {LocalStorageService} from '../../../shared/services/local-storage.service';
 import {USER} from '../const/localstorage-keys';
+import {User} from '../models/auth';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

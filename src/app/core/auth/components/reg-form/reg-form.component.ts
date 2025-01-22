@@ -1,20 +1,24 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AsyncPipe, NgIf} from '@angular/common';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {
+  AbstractControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
+import {AsyncPipe} from '@angular/common';
 import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
 import {Store} from '@ngrx/store';
 import {reg} from '../../store/auth.actions';
 import {selectAuthError} from '../../store/auth.selectors';
 import {RouterLink} from '@angular/router';
-import {tap} from 'rxjs/operators';
-import {RegFormControl} from '../../models/reg-form-control.enum';
+import {RegFormControl} from '../../models/reg';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf,
     AsyncPipe,
     RouterLink
   ],
@@ -30,8 +34,6 @@ export class RegFormComponent {
   private fb = inject(NonNullableFormBuilder)
   private store = inject(Store);
 
-  authError = signal<string | null | undefined>(null);
-
   regForm = this.fb.group({
       [RegFormControl.username]: ['', [Validators.required]],
       [RegFormControl.password]: ['', [Validators.required]],
@@ -42,17 +44,14 @@ export class RegFormComponent {
     }
   );
 
-  authError$ = this.store.select(selectAuthError)
-    .pipe(
-      tap(error => this.authError.set(error))
-    );
+  authError$ = this.store.select(selectAuthError);
 
   isControlInvalid(controlName: string): boolean | undefined {
     const control = this.regForm.get(controlName);
     return control?.invalid && (control.dirty || control.touched);
   }
 
-  matchPasswordsValidator(controlGroup: any) {
+  matchPasswordsValidator(controlGroup: AbstractControl): ValidationErrors | null {
     const password = controlGroup.get(RegFormControl.password)?.value;
     const confirmPassword = controlGroup.get(RegFormControl.confirmPassword)?.value;
 

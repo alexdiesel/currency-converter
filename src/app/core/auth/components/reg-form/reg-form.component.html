@@ -1,7 +1,6 @@
 <h1>Sign up</h1>
 
-<form *ngIf="{ authError: authError$ | async}"
-      class="auth-form"
+<form class="auth-form"
       [formGroup]="regForm"
       (ngSubmit)="onSubmit()">
 
@@ -13,9 +12,12 @@
              required>
     </label>
 
-    <p *ngIf="isControlInvalid(RegFormControl.username)">
-      {{ getControlErrorMessage(RegFormControl.username, regForm) }}
-    </p>
+
+    @if (isControlInvalid(RegFormControl.username)) {
+      <p>{{ getControlErrorMessage(RegFormControl.username, regForm) }}</p>
+    }
+
+
   </div>
 
   <div>
@@ -26,9 +28,9 @@
              required>
     </label>
 
-    <p *ngIf="isControlInvalid(RegFormControl.username)">
-      {{ getControlErrorMessage(RegFormControl.password, regForm) }}
-    </p>
+    @if (isControlInvalid(RegFormControl.password)) {
+      <p>{{ getControlErrorMessage(RegFormControl.password, regForm) }}</p>
+    }
   </div>
 
   <div>
@@ -39,16 +41,19 @@
              required>
     </label>
 
-    <p *ngIf="isControlInvalid(RegFormControl.username)">
-      {{ getControlErrorMessage(RegFormControl.password, regForm) }}
-    </p>
+    @if (isControlInvalid(RegFormControl.confirmPassword)) {
+      <p>{{ getControlErrorMessage(RegFormControl.confirmPassword, regForm) }}</p>
+    }
+
   </div>
 
-  <p *ngIf="regForm.errors?.['matchPasswords']">Passwords don't match</p>
+  @if (regForm.errors?.['matchPasswords']) {
+    <p>Passwords don't match</p>
+  }
 
-  <div *ngIf="authError()">
-    <p class="error">{{ authError() }}</p>
-  </div>
+  @if (authError$ | async; as error) {
+    <p class="error">{{ error }}</p>
+  }
 
   <button [disabled]="!regForm.valid">Sign up</button>
 

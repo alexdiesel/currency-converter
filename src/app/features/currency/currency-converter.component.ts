@@ -1,17 +1,6 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  Injector,
-  runInInjectionContext,
-  signal,
-  ViewChild
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {CurrencyConverterFormComponent} from './components/currency-converter-form/currency-converter-form.component';
 import {CurrencyService} from './services/currency.service';
-import {NgIf} from '@angular/common';
 import {HistoryService} from './services/history.service';
 import {
   CurrencyConverterHistoryComponent
@@ -21,7 +10,6 @@ import {
   selector: 'app-currency-converter',
   imports: [
     CurrencyConverterFormComponent,
-    NgIf,
     CurrencyConverterHistoryComponent,
   ],
   providers: [
@@ -32,22 +20,9 @@ import {
   styleUrl: './currency-converter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CurrencyConverterComponent implements AfterViewInit {
-
-  private injector = inject(Injector)
-
-  @ViewChild('currencyConverter') currencyConverter!: CurrencyConverterFormComponent;
+export class CurrencyConverterComponent {
 
   showForm = signal(true);
   toggleForm = () => this.showForm.update((value) => !value);
-
-  ngAfterViewInit(): void {
-    runInInjectionContext(this.injector, () => {
-      effect(() => {
-        const result = this.currencyConverter.exchangeResult();
-      });
-    });
-
-  }
 
 }

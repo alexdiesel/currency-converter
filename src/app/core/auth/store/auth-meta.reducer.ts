@@ -1,8 +1,7 @@
 import {ActionReducer, INIT, UPDATE} from '@ngrx/store';
-import {AuthState} from '../models/auth-state.interface';
+import {AuthState, User} from '../models/auth';
 import {LocalStorageService} from '../../../shared/services/local-storage.service';
 import {USER} from '../const/localstorage-keys';
-import {User} from '../models/user.interface';
 
 export function authMetaReducer(reducer: ActionReducer<{
     auth: AuthState
@@ -17,16 +16,12 @@ export function authMetaReducer(reducer: ActionReducer<{
                     ...{username, secret, token},
                     isAuthenticated: !!token
                 }
-                console.log('authMetaReducer INIT', JSON.stringify(auth, null, 2));
                 return reducer(
                     {...state, auth: {...auth}},
                     action
                 );
             }
         }
-
-        const nextState = reducer(state, action);
-        console.log('authMetaReducer', JSON.stringify(nextState, null, 2));
-        return nextState;
+        return reducer(state, action);
     };
 }

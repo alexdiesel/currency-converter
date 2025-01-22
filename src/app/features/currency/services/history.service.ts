@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ExchangeHistory} from '../models/exchange-history.interface';
+import {ExchangeHistory} from '../models/exchange';
 
 
 export class HistoryService {

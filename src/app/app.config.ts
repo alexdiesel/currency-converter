@@ -7,7 +7,7 @@ import {provideStoreDevtools} from '@ngrx/store-devtools';
 import {AuthEffects} from './core/auth/store/auth.effects';
 import {provideEffects} from '@ngrx/effects';
 import {provideStore} from '@ngrx/store';
-import {metaReducers, reducers} from './core/auth/store';
+import {metaReducers, reducers} from './shared/store';
 
 
 export const appConfig: ApplicationConfig = {
