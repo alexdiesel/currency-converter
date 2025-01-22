@@ -1,44 +1,45 @@
 <form class="currency-converter-form"
       [formGroup]="currencyConverterForm">
 
-  <div>
-    <label>
-      <span>Currency from</span>
-      <select [formControlName]="CurrencyConverterFormControl.currency_from">
-        <option *ngFor="let cur of curList"
-                [value]="cur.id">{{ cur.value }}
-        </option>
-      </select>
-    </label>
-  </div>
+  <label class="label">
+    <select class="control"
+            [formControlName]="CurrencyConverterFormControl.base_currency">
+      <option *ngFor="let cur of currencyOptions()"
+              [value]="cur.id"
+              [disabled]="cur.id === targetCurrency()">
+        {{ cur.name }}
+      </option>
+    </select>
+  </label>
 
-  <div>
-    <label>
-      <span>Currency to</span>
-      <select [formControlName]="CurrencyConverterFormControl.currency_to">
-        <option *ngFor="let cur of curList"
-                [value]="cur.id">{{ cur.value }}
-        </option>
-      </select>
-    </label>
-  </div>
+  <label class="label">
+    <select class="control"
+            [formControlName]="CurrencyConverterFormControl.currency">
+      <option *ngFor="let cur of currencyOptions()"
+              [value]="cur.id"
+              [disabled]="cur.id === baseCurrency()">
+        {{ cur.name }}
+      </option>
+    </select>
+  </label>
 
-  <div>
-    <label>
-      <span>Amount from</span>
-      <input [formControlName]="CurrencyConverterFormControl.amount_from" type="number">
-    </label>
-  </div>
+  <label class="label">
+    <input class="control"
+           [formControlName]="CurrencyConverterFormControl.amount"
+           type="number"/>
+  </label>
 
-  <div>
-    <label>
-      <span>Amount to</span>
-      <input [formControlName]="CurrencyConverterFormControl.amount_to" type="number">
-    </label>
-  </div>
+  <label class="label">
+    <input class="control"
+           [formControlName]="CurrencyConverterFormControl.amountResult"
+           type="number"/>
+  </label>
 
-  <button [disabled]="!currencyConverterForm.valid"
+  <button class="btn"
+          [disabled]="!currencyConverterForm.valid"
           type="submit">Save to list
   </button>
 
 </form>
+
+<pre>{{ exchangeResult() | json }}</pre>

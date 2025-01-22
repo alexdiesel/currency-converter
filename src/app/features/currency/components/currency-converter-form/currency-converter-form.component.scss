@@ -1,6 +1,16 @@
 .currency-converter-form {
   max-width: 480px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+.control{
+  display: inline-block;
+  width: 100%;
+}
+
+.btn {
+  grid-column: 1/-1;
+  justify-self: right;
 }

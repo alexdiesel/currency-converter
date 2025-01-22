@@ -1,2 +1,7 @@
 <h1>Currency Converter</h1>
-<app-currency-converter-form></app-currency-converter-form>
+
+<button class="btn"
+        (click)="toggleForm()">{{ showForm() ? 'Hide form' : 'Show form' }}
+</button>
+
+<app-currency-converter-form *ngIf="showForm()"></app-currency-converter-form>
