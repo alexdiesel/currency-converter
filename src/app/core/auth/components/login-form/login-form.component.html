@@ -1,16 +1,10 @@
 <h1>Log In</h1>
 
-<form class="auth-form"
-      [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()">
-
+<form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label>
       <small class="form-text text-muted">User name</small>
-      <input class="form-control"
-             [formControlName]="LoginFormControl.username"
-             type="text"
-             required>
+      <input class="form-control" [formControlName]="LoginFormControl.username" type="text" required />
     </label>
     @if (isControlInvalid(LoginFormControl.username)) {
       <div class="invalid-feedback error">{{ getControlErrorMessage(LoginFormControl.username, loginForm) }}</div>
@@ -20,10 +14,7 @@
   <div class="form-group">
     <label>
       <small class="form-text text-muted">Password</small>
-      <input class="form-control"
-             [formControlName]="LoginFormControl.password"
-             type="password"
-             required>
+      <input class="form-control" [formControlName]="LoginFormControl.password" type="password" required />
     </label>
     @if (isControlInvalid(LoginFormControl.password)) {
       <div class="invalid-feedback error">{{ getControlErrorMessage(LoginFormControl.password, loginForm) }}</div>
@@ -34,11 +25,7 @@
     <div class="invalid-feedback error">{{ error }}</div>
   }
 
-  <button class="btn btn-primary btn-action"
-          [disabled]="!loginForm.valid">Log in
-  </button>
-
+  <button class="btn btn-primary btn-action" [disabled]="!loginForm.valid">Log in</button>
 </form>
 
 <p>Don't have an account? <a class="link-info" routerLink="/auth/registration">Sign up</a></p>
-

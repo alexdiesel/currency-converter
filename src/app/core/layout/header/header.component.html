@@ -1,8 +1,6 @@
 <header class="header">
-  <a routerLink="/currency-converter"
-     class="logo"
-     title="Currency Converter">
-    <img class="logo-img" src="/logo.svg" alt="Currency Converter">
+  <a routerLink="/currency-converter" class="logo" title="Currency Converter">
+    <img class="logo-img" src="/logo.svg" alt="Currency Converter" />
     <span class="logo-title">
       <span class="logo-title-l1">Currency</span>
       <span class="logo-title-l2">Converter</span>
@@ -11,23 +9,14 @@
 
   @if (isAuthenticated$ | async) {
     <div class="user">
-
-      <button class="toggle-menu btn btn-sm btn-outline-secondary"
-              (click)="toggleMenu()"
-              type="button">
+      <button class="toggle-menu btn btn-sm btn-outline-secondary" (click)="toggleMenu()" type="button">
         <i class="bi bi-list"></i>
       </button>
 
-      <div class="menu-wrap"
-           [class.show]="menuToggle()">
+      <div class="menu-wrap" [class.show]="menuToggle()">
         <span>{{ userName$ | async }}!</span>
-        <button class="btn btn-sm btn-outline-secondary"
-                (click)="logout()">Log out
-        </button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="logout()">Log out</button>
       </div>
-
     </div>
   }
-
-
 </header>

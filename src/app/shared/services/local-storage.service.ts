@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
-import {LOCAL_STORAGE_PREFIX} from '../../core/auth/const/localstorage-keys';
+import { Injectable } from '@angular/core';
+import { LOCAL_STORAGE_PREFIX } from '../../core/auth/const/localstorage-keys';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-
   set<T>(key: string, value: T): boolean {
     try {
       if (value === undefined) {
@@ -16,7 +15,7 @@ export class LocalStorageService {
       return true;
     } catch (e) {
       console.error(e);
-      return false
+      return false;
     }
   }
 
@@ -36,5 +35,4 @@ export class LocalStorageService {
   remove(key: string): void {
     localStorage.removeItem(LOCAL_STORAGE_PREFIX + key);
   }
-
 }

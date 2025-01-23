@@ -1,6 +1,6 @@
-@use "../../../shared/styles/variables" as *;
+@use '../../../shared/styles/variables' as *;
 
-:host{
+:host {
   display: flex;
   flex-direction: column;
   gap: 20px;

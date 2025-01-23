@@ -1,9 +1,7 @@
-import {BehaviorSubject, Observable} from 'rxjs';
-import {ExchangeHistory} from '../models/exchange';
-
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ExchangeHistory } from '../models/exchange';
 
 export class HistoryService {
-
   private exchangeHistory$ = new BehaviorSubject<ExchangeHistory[]>([]);
 
   getExchangeHistory(): Observable<ExchangeHistory[]> {
@@ -19,7 +17,6 @@ export class HistoryService {
   }
 
   removeExchangeHistory(id: number) {
-    this.exchangeHistory$.next(this.exchangeHistory$.value.filter(item => item.id !== id));
+    this.exchangeHistory$.next(this.exchangeHistory$.value.filter((item) => item.id !== id));
   }
-
 }

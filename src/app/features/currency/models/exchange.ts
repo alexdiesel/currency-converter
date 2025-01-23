@@ -1,6 +1,4 @@
-export interface ExchangeRates {
-  [currencyCode: string]: number;
-}
+export type ExchangeRates = Record<string, number>;
 
 export interface ExchangeRatesDto {
   data: ExchangeRates;
@@ -23,12 +21,12 @@ export class ExchangeHistoryModel implements ExchangeHistory {
   targetCurrency: string;
   exchangeResult: string;
 
-  constructor({id, date, baseCurrency, baseAmount, targetCurrency, exchangeResult}: ExchangeHistory) {
+  constructor({ id, date, baseCurrency, baseAmount, targetCurrency, exchangeResult }: ExchangeHistory) {
     this.id = id;
     this.date = date.toString();
     this.baseCurrency = baseCurrency;
     this.baseAmount = baseAmount.toLocaleString();
     this.targetCurrency = targetCurrency;
-    this.exchangeResult = (+(+exchangeResult).toFixed(3)).toLocaleString()
+    this.exchangeResult = (+(+exchangeResult).toFixed(3)).toLocaleString();
   }
 }

@@ -1,5 +1,5 @@
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {getControlErrorMessage} from './get-control-error-message';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { getControlErrorMessage } from './get-control-error-message';
 
 describe('getControlErrorMessage', () => {
   let formGroup: FormGroup;

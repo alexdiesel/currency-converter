@@ -10,9 +10,7 @@ export interface CurrencyInfo {
 }
 
 export interface CurrencyInfoDto {
-  data: {
-    [currencyCode: string]: CurrencyInfo;
-  } | null
+  data: Record<string, CurrencyInfo> | null;
 }
 
 export enum CurrencyConverterFormControl {

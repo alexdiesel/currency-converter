@@ -9,4 +9,3 @@ export enum RegFormControl {
   password = 'password',
   confirmPassword = 'confirmPassword',
 }
-

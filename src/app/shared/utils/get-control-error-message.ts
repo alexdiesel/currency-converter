@@ -1,4 +1,4 @@
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 export const getControlErrorMessage = (controlName: string, formGroup: FormGroup): string => {
   const control = formGroup.get(controlName);
@@ -6,4 +6,4 @@ export const getControlErrorMessage = (controlName: string, formGroup: FormGroup
     return 'This field is required';
   }
   return '';
-}
+};

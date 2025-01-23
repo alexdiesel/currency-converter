@@ -1,16 +1,10 @@
 <h1>Sign up</h1>
 
-<form class="auth-form"
-      [formGroup]="regForm"
-      (ngSubmit)="onSubmit()">
-
+<form class="auth-form" [formGroup]="regForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label>
       <small class="form-text text-muted">User name</small>
-      <input class="form-control"
-             [formControlName]="RegFormControl.username"
-             type="text"
-             required>
+      <input class="form-control" [formControlName]="RegFormControl.username" type="text" required />
     </label>
     @if (isControlInvalid(RegFormControl.username)) {
       <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.username, regForm) }}</div>
@@ -20,10 +14,7 @@
   <div class="form-group">
     <label>
       <small class="form-text text-muted">Password</small>
-      <input class="form-control"
-             [formControlName]="RegFormControl.password"
-             type="password"
-             required>
+      <input class="form-control" [formControlName]="RegFormControl.password" type="password" required />
     </label>
     @if (isControlInvalid(RegFormControl.password)) {
       <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.password, regForm) }}</div>
@@ -33,10 +24,7 @@
   <div class="form-group">
     <label>
       <small class="form-text text-muted">Confirm password</small>
-      <input class="form-control"
-             [formControlName]="RegFormControl.confirmPassword"
-             type="password"
-             required>
+      <input class="form-control" [formControlName]="RegFormControl.confirmPassword" type="password" required />
     </label>
     @if (isControlInvalid(RegFormControl.confirmPassword)) {
       <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.confirmPassword, regForm) }}</div>
@@ -51,11 +39,7 @@
     <div class="invalid-feedback error">{{ error }}</div>
   }
 
-  <button class="btn btn-primary btn-action"
-          [disabled]="!regForm.valid">Sign up
-  </button>
-
+  <button class="btn btn-primary btn-action" [disabled]="!regForm.valid">Sign up</button>
 </form>
 
 <p>Already have an account? <a class="link-info" routerLink="/auth/login">Log in</a></p>
-

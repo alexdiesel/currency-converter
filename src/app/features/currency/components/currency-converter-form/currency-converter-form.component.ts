@@ -1,16 +1,16 @@
-import {ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal,} from '@angular/core';
-import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {getControlErrorMessage} from '../../../../shared/utils/get-control-error-message';
-import {CurrencyService} from '../../services/currency.service';
-import {getCurrencyOptionsFromResponse} from '../../utils/get-currency-options-from-response';
-import {IdNameOption} from '../../../../shared/models/id-name-option';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {BASE_CURRENCY} from '../../consts/base-currency.const';
-import {INIT_CURRENCY} from '../../consts/init-currency.const';
-import {debounceTime} from 'rxjs';
-import {HistoryService} from '../../services/history.service';
-import {CurrencyConverterFormControl} from '../../models/currency';
-import {ExchangeHistoryModel, ExchangeRates} from '../../models/exchange';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { getControlErrorMessage } from '../../../../shared/utils/get-control-error-message';
+import { CurrencyService } from '../../services/currency.service';
+import { getCurrencyOptionsFromResponse } from '../../utils/get-currency-options-from-response';
+import { IdNameOption } from '../../../../shared/models/id-name-option';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BASE_CURRENCY } from '../../consts/base-currency.const';
+import { INIT_CURRENCY } from '../../consts/init-currency.const';
+import { debounceTime } from 'rxjs';
+import { HistoryService } from '../../services/history.service';
+import { CurrencyConverterFormControl } from '../../models/currency';
+import { ExchangeHistoryModel, ExchangeRates } from '../../models/exchange';
 
 @Component({
   selector: 'app-currency-converter-form',
@@ -21,10 +21,8 @@ import {ExchangeHistoryModel, ExchangeRates} from '../../models/exchange';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrencyConverterFormComponent {
-
   CurrencyConverterFormControl = CurrencyConverterFormControl;
   getControlErrorMessage = getControlErrorMessage;
-
 
   currencyOptions = signal<IdNameOption[]>([]);
   baseCurrency = signal<string>(BASE_CURRENCY);
@@ -49,7 +47,7 @@ export class CurrencyConverterFormComponent {
     [CurrencyConverterFormControl.base_currency]: [BASE_CURRENCY, [Validators.required]],
     [CurrencyConverterFormControl.currency]: [INIT_CURRENCY, [Validators.required]],
     [CurrencyConverterFormControl.amount]: [1, [Validators.required]],
-    [CurrencyConverterFormControl.amountResult]: [{value: 1, disabled: true}, [Validators.required]],
+    [CurrencyConverterFormControl.amountResult]: [{ value: 1, disabled: true }, [Validators.required]],
   });
 
   constructor() {
@@ -74,25 +72,22 @@ export class CurrencyConverterFormComponent {
       const target = this.targetCurrency();
 
       this.currencyService
-        .getLatest({base_currency: base, currencies: [target]})
+        .getLatest({ base_currency: base, currencies: [target] })
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((rates) => {
           this.exchangeRates.set(rates);
 
           this.currencyConverterForm
             .get(CurrencyConverterFormControl.amountResult)
-            ?.setValue(this.exchangeResult(), {emitEvent: false});
+            ?.setValue(this.exchangeResult(), { emitEvent: false });
         });
     });
   }
 
   private syncFormWithSignals() {
     this.currencyConverterForm.valueChanges
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        debounceTime(200)
-      )
-      .subscribe(({base_currency, currency, amount}) => {
+      .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
+      .subscribe(({ base_currency, currency, amount }) => {
         this.baseAmount.set(amount!);
         this.baseCurrency.set(base_currency!);
         this.targetCurrency.set(currency!);
@@ -103,7 +98,7 @@ export class CurrencyConverterFormComponent {
     effect(() => {
       this.currencyConverterForm
         .get(CurrencyConverterFormControl.amountResult)
-        ?.setValue(this.exchangeResult(), {emitEvent: false});
+        ?.setValue(this.exchangeResult(), { emitEvent: false });
     });
   }
 
@@ -116,7 +111,7 @@ export class CurrencyConverterFormComponent {
         baseAmount: this.baseAmount(),
         targetCurrency: this.targetCurrency(),
         exchangeResult: this.exchangeResult(),
-      })
-    )
+      }),
+    );
   }
 }

@@ -1,15 +1,11 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [
-    RouterOutlet,
-  ],
+  imports: [RouterOutlet],
   templateUrl: './auth.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent {
-
-}
+export class AuthComponent {}
