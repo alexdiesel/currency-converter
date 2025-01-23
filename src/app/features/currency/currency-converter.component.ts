@@ -22,7 +22,4 @@ import {
 })
 export class CurrencyConverterComponent {
 
-  showForm = signal(true);
-  toggleForm = () => this.showForm.update((value) => !value);
-
 }

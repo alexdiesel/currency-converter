@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {selectIsAuthenticated, selectUsername} from '../../auth/store/auth.selectors';
@@ -23,8 +23,14 @@ export class HeaderComponent {
   isAuthenticated$ = this.store.select(selectIsAuthenticated);
   userName$ = this.store.select(selectUsername);
 
+  menuToggle = signal(false);
 
   logout(): void {
+    this.menuToggle.set(false);
     this.store.dispatch(logout());
+  }
+
+  toggleMenu(): void {
+   this.menuToggle.set(!this.menuToggle());
   }
 }

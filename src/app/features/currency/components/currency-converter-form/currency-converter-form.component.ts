@@ -10,7 +10,7 @@ import {INIT_CURRENCY} from '../../consts/init-currency.const';
 import {debounceTime} from 'rxjs';
 import {HistoryService} from '../../services/history.service';
 import {CurrencyConverterFormControl} from '../../models/currency';
-import {ExchangeRates} from '../../models/exchange';
+import {ExchangeHistoryModel, ExchangeRates} from '../../models/exchange';
 
 @Component({
   selector: 'app-currency-converter-form',
@@ -25,6 +25,7 @@ export class CurrencyConverterFormComponent {
   CurrencyConverterFormControl = CurrencyConverterFormControl;
   getControlErrorMessage = getControlErrorMessage;
 
+
   currencyOptions = signal<IdNameOption[]>([]);
   baseCurrency = signal<string>(BASE_CURRENCY);
   targetCurrency = signal<string>(INIT_CURRENCY);
@@ -33,8 +34,11 @@ export class CurrencyConverterFormComponent {
   exchangeResult = computed(() => {
     const rate = this.exchangeRates()[this.targetCurrency()];
     const amount = this.baseAmount();
-    return +(rate * amount).toFixed(4);
+    return +(rate * amount).toFixed(3);
   });
+
+  showForm = signal(true);
+  toggleForm = () => this.showForm.update((value) => !value);
 
   private destroyRef = inject(DestroyRef);
   private fb = inject(NonNullableFormBuilder);
@@ -104,13 +108,15 @@ export class CurrencyConverterFormComponent {
   }
 
   saveToHistory(): void {
-    this.historyService.setExchangeHistory({
-      id: this.historyService.getExchangeHistoryLastIndex() + 1,
-      date: new Date().toISOString(),
-      baseCurrency: this.baseCurrency(),
-      baseAmount: this.baseAmount(),
-      targetCurrency: this.targetCurrency(),
-      exchangeResult: this.exchangeResult(),
-    })
+    this.historyService.setExchangeHistory(
+      new ExchangeHistoryModel({
+        id: this.historyService.getExchangeHistoryLastIndex() + 1,
+        date: new Date(),
+        baseCurrency: this.baseCurrency(),
+        baseAmount: this.baseAmount(),
+        targetCurrency: this.targetCurrency(),
+        exchangeResult: this.exchangeResult(),
+      })
+    )
   }
 }

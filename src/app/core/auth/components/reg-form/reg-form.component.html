@@ -4,47 +4,43 @@
       [formGroup]="regForm"
       (ngSubmit)="onSubmit()">
 
-  <div>
+  <div class="form-group">
     <label>
-      <span>User name</span>
-      <input [formControlName]="RegFormControl.username"
+      <small class="form-text text-muted">User name</small>
+      <input class="form-control"
+             [formControlName]="RegFormControl.username"
              type="text"
              required>
     </label>
-
-
     @if (isControlInvalid(RegFormControl.username)) {
-      <p>{{ getControlErrorMessage(RegFormControl.username, regForm) }}</p>
+      <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.username, regForm) }}</div>
     }
-
-
   </div>
 
-  <div>
+  <div class="form-group">
     <label>
-      <span>Password</span>
-      <input [formControlName]="RegFormControl.password"
+      <small class="form-text text-muted">Password</small>
+      <input class="form-control"
+             [formControlName]="RegFormControl.password"
              type="password"
              required>
     </label>
-
     @if (isControlInvalid(RegFormControl.password)) {
-      <p>{{ getControlErrorMessage(RegFormControl.password, regForm) }}</p>
+      <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.password, regForm) }}</div>
     }
   </div>
 
-  <div>
+  <div class="form-group">
     <label>
-      <span>Confirm password</span>
-      <input [formControlName]="RegFormControl.confirmPassword"
+      <small class="form-text text-muted">Confirm password</small>
+      <input class="form-control"
+             [formControlName]="RegFormControl.confirmPassword"
              type="password"
              required>
     </label>
-
     @if (isControlInvalid(RegFormControl.confirmPassword)) {
-      <p>{{ getControlErrorMessage(RegFormControl.confirmPassword, regForm) }}</p>
+      <div class="invalid-feedback error">{{ getControlErrorMessage(RegFormControl.confirmPassword, regForm) }}</div>
     }
-
   </div>
 
   @if (regForm.errors?.['matchPasswords']) {
@@ -52,12 +48,14 @@
   }
 
   @if (authError$ | async; as error) {
-    <p class="error">{{ error }}</p>
+    <div class="invalid-feedback error">{{ error }}</div>
   }
 
-  <button [disabled]="!regForm.valid">Sign up</button>
+  <button class="btn btn-primary btn-action"
+          [disabled]="!regForm.valid">Sign up
+  </button>
 
 </form>
 
-<p>Already have an account? <a routerLink="/auth/login">Log in</a></p>
+<p>Already have an account? <a class="link-info" routerLink="/auth/login">Log in</a></p>
 

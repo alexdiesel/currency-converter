@@ -1,11 +1,2 @@
-<h1>Currency Converter</h1>
-
-<button class="btn"
-        (click)="toggleForm()">{{ showForm() ? 'Hide form' : 'Show form' }}
-</button>
-
-@if (showForm()) {
-  <app-currency-converter-form></app-currency-converter-form>
-}
-
+<app-currency-converter-form></app-currency-converter-form>
 <app-currency-converter-history></app-currency-converter-history>

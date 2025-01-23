@@ -10,7 +10,12 @@
   width: 100%;
 }
 
-.btn {
-  grid-column: 1/-1;
+.btn-hide {
+  grid-column: 1/2;
+  justify-self: left;
+}
+
+.btn-save {
+  grid-column: 2/3;
   justify-self: right;
 }

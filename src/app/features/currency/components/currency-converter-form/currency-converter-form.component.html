@@ -1,47 +1,62 @@
-<form class="currency-converter-form"
-      [formGroup]="currencyConverterForm">
+@if (showForm()) {
+  <form class="currency-converter-form"
+        [formGroup]="currencyConverterForm">
 
-  <label class="label">
-    <select class="control"
-            [formControlName]="CurrencyConverterFormControl.base_currency">
-      @for (cur of currencyOptions(); track cur.id) {
-        <option [value]="cur.id"
-                [disabled]="cur.id === targetCurrency()">
-          {{ cur.name }}
-        </option>
-      }
+    <div class="form-group">
+      <small class="form-text text-muted">Select base currency</small>
+      <select class="form-control"
+              [formControlName]="CurrencyConverterFormControl.base_currency">
+        @for (cur of currencyOptions(); track cur.id) {
+          <option [value]="cur.id"
+                  [disabled]="cur.id === targetCurrency()">
+            {{ cur.name }}
+          </option>
+        }
+      </select>
+    </div>
 
-    </select>
-  </label>
 
-  <label class="label">
-    <select class="control"
-            [formControlName]="CurrencyConverterFormControl.currency">
-      @for (cur of currencyOptions(); track cur.id) {
-        <option [value]="cur.id"
-                [disabled]="cur.id === baseCurrency()">
-          {{ cur.name }}
-        </option>
-      }
-    </select>
-  </label>
+    <div class="form-group">
+      <small class="form-text text-muted">Select target currency</small>
+      <select class="form-control"
+              [formControlName]="CurrencyConverterFormControl.currency">
+        @for (cur of currencyOptions(); track cur.id) {
+          <option [value]="cur.id"
+                  [disabled]="cur.id === baseCurrency()">
+            {{ cur.name }}
+          </option>
+        }
+      </select>
+    </div>
 
-  <label class="label">
-    <input class="control"
-           [formControlName]="CurrencyConverterFormControl.amount"
-           type="number"/>
-  </label>
+    <div class="form-group">
+      <small class="form-text text-muted">Enter amount</small>
+      <input class="form-control"
+             [formControlName]="CurrencyConverterFormControl.amount"
+             type="number"/>
+    </div>
 
-  <label class="label">
-    <input class="control"
-           [formControlName]="CurrencyConverterFormControl.amountResult"
-           type="number"/>
-  </label>
+    <div class="form-group">
+      <small class="form-text text-muted">Converted amount</small>
+      <input class="form-control"
+             [formControlName]="CurrencyConverterFormControl.amountResult"
+             type="number"/>
+    </div>
 
-  <button class="btn"
-          [disabled]="!currencyConverterForm.valid"
-          (click)="saveToHistory()"
-          type="button">Save to History
+    <button class="btn btn-light btn-hide"
+            (click)="toggleForm()"
+            type="button">Hide form
+    </button>
+
+    <button class="btn btn-primary btn-save"
+            [disabled]="!currencyConverterForm.valid"
+            (click)="saveToHistory()"
+            type="button">Save to History
+    </button>
+
+  </form>
+} @else {
+  <button class="btn btn-primary"
+          (click)="toggleForm()">Show form
   </button>
-
-</form>
+}

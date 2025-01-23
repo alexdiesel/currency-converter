@@ -1,32 +1,88 @@
+@use "../../../shared/styles/variables" as *;
+
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid #ccc;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .logo {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
+
+  @media (width < $mobile-width) {
+    flex-direction: column;
+  }
 
   &-img {
     width: 40px;
   }
 
   &-title {
-    font-size: 18px;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: flex;
+    gap: 4px;
+    font-weight: 700;
+
+    &-l1 {
+      color: var(--bs-primary);
+    }
+
+    &-l2 {
+      color: var(--bs-green);
+    }
   }
 
 }
 
-.nav {
+.user {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
-  text-decoration: none;
+  position: relative;
 
-  &.active {
-    color: #007bff;
+  @media (width >= $tablet-width) {
+    flex-direction: column;
+  }
+}
+
+.toggle-menu {
+  position: relative;
+  z-index: 1;
+
+  @media (width >= $tablet-width) {
+    display: none;
+  }
+}
+
+.menu-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  &:not(.show) {
+    @media (width < $tablet-width) {
+      display: none;
+    }
+  }
+
+  &.show {
+    @media (width < $tablet-width) {
+      position: absolute;
+      flex-direction: column;
+      background: var(--bs-gray-100);
+      padding: 60px 20px 10px;
+      max-width: 240px;
+      top: -10px;
+      right: -10px;
+      border-radius: 5px;
+      box-shadow: 4px 4px #eee;
+      align-items: end;
+      gap: 18px;
+    }
   }
 }

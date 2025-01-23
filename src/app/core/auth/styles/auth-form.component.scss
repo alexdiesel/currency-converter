@@ -1,6 +1,23 @@
-.auth-form {
-  max-width: 480px;
+@use "../../../shared/styles/variables" as *;
+
+:host{
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.auth-form {
+  max-width: $mobile-width;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn-action {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.error {
+  display: block;
 }

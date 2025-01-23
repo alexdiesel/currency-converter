@@ -8,9 +8,27 @@ export interface ExchangeRatesDto {
 
 export interface ExchangeHistory {
   id?: number;
+  date: Date | string;
+  baseCurrency: string;
+  baseAmount: number | string;
+  targetCurrency: string;
+  exchangeResult: number | string;
+}
+
+export class ExchangeHistoryModel implements ExchangeHistory {
+  id?: number;
   date: string;
   baseCurrency: string;
-  baseAmount: number;
+  baseAmount: string;
   targetCurrency: string;
-  exchangeResult: number;
+  exchangeResult: string;
+
+  constructor({id, date, baseCurrency, baseAmount, targetCurrency, exchangeResult}: ExchangeHistory) {
+    this.id = id;
+    this.date = date.toString();
+    this.baseCurrency = baseCurrency;
+    this.baseAmount = baseAmount.toLocaleString();
+    this.targetCurrency = targetCurrency;
+    this.exchangeResult = (+(+exchangeResult).toFixed(3)).toLocaleString()
+  }
 }
