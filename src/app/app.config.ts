@@ -8,6 +8,7 @@ import { AuthEffects } from './core/auth/store/auth.effects';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { metaReducers, reducers } from './shared/store';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,6 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
-    provideAnimationsAsync(),
+    provideAnimationsAsync(), provideClientHydration(withEventReplay()),
   ],
 };
