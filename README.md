@@ -1,6 +1,6 @@
 # Angular 19 Project
 
-This project is built with Angular 19 and provides functionality for user registration and login entirely on the browser side. After logging in, users are redirected to a currency conversion page where they can save results in a table. The table remains accessible until the application is reloaded.
+This **test task** project is built with Angular 19 and provides functionality for user registration and login entirely on the browser side. After logging in, users are redirected to a currency conversion page where they can save results in a table. The table remains accessible until the application is reloaded.
 
 ## Getting Started
 
